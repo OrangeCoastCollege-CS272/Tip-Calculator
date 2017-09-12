@@ -16,11 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText mSubtotalEditText;
     private TextView mSubtotalTextView;
+    private TextView mTipAmountTextView;
+    private TextView mTotalAmountTextView;
 
     private Bill mBill = new Bill();
 
     private void updateViews() {
-        
+        mSubtotalTextView.setText(currency.format(mBill.getAmount()));
+        mTipAmountTextView.setText(currency.format(mBill.getTipAmount()));
+        mTotalAmountTextView.setText(currency.format(mBill.getTotalAmount()));
     }
 
     @Override
@@ -30,16 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
         mSubtotalEditText = (EditText) findViewById(R.id.subtotalEditText);
         mSubtotalTextView = (TextView) findViewById(R.id.subtotalTextView);
+        mTipAmountTextView = (TextView) findViewById(R.id.tipTextView);
+        mTotalAmountTextView = (TextView) findViewById(R.id.totalTextView);
 
         mSubtotalEditText.addTextChangedListener(amountTextWatcher);
+        
+        mBill.setTipPercent(0.15);
     }
 
     private final TextWatcher amountTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             try {
@@ -50,10 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 mSubtotalTextView.setText(currency.format(0.0));
             }
         }
-
         @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
+        public void afterTextChanged(Editable editable) {}
     };
 }
