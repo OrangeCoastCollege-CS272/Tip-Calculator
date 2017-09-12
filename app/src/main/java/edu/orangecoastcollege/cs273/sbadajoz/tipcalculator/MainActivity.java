@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 mBill.setAmount(subTotal);
 //                mSubtotalTextView.setText(currency.format(subTotal));
             }catch(NumberFormatException e) {
-                mSubtotalTextView.setText(currency.format(0.0));
+                mBill.setAmount(0.0);
             }
             updateViews();
         }
