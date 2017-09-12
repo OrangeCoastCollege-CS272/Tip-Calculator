@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         mTotalAmountTextView = (TextView) findViewById(R.id.totalTextView);
 
         mSubtotalEditText.addTextChangedListener(amountTextWatcher);
-        
+
         mBill.setTipPercent(0.15);
     }
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }catch(NumberFormatException e) {
                 mSubtotalTextView.setText(currency.format(0.0));
             }
+            updateViews();
         }
         @Override
         public void afterTextChanged(Editable editable) {}
