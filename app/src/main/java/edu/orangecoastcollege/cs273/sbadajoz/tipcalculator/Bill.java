@@ -1,50 +1,80 @@
 package edu.orangecoastcollege.cs273.sbadajoz.tipcalculator;
-
 /**
- * Created by sbadajoz on 9/7/2017.
+ * Models a <code>Bill</code>, representing an amount with tip to construct the total;
  */
-
 public class Bill {
-    private double mTotalAmount;
+    private double mAmount;
     private double mTipPercent;
     private double mTipAmount;
-    private double mSubtotal;
+    private double mTotalAmount;
 
-    public Bill() {
-        mTotalAmount = 0.0;
-        mTipPercent = 0.15;
+    /**
+     * Constructor to initialize a new <code>Bill</code> with zeros for the
+     * values of amount, tip and total.
+     */
+    public Bill()
+    {
+        mAmount = 0.0;
+        mTipPercent = 0.0;
         mTipAmount = 0.0;
-        mSubtotal = 0.0;
+        mTotalAmount = 0.0;
     }
 
-    private void recalculate() {
-        mTipAmount = mSubtotal * mTipPercent;
-        mTotalAmount = mSubtotal + mTipAmount;
+    /**
+     * Gets the amount of the bill without tip.
+     * @return The amount of the bill without tip.
+     */
+    public double getAmount() {
+        return mAmount;
     }
 
-    public double getTotalAmount() {
-        return mTotalAmount;
-    }
-
+    /**
+     * Gets the tip percentage as a real number.
+     * E.g. 20% will be returned as 0.2
+     * @return The tip percentage as a real number.
+     */
     public double getTipPercent() {
         return mTipPercent;
     }
 
-    public void setTipPercent(double tipPercent) {
-        mTipPercent = tipPercent;
-        recalculate();
-    }
-
+    /**
+     * Gets the tip amount in dollars.
+     * @return The tip amount in dollars.
+     */
     public double getTipAmount() {
         return mTipAmount;
     }
 
-    public double getSubtotal() {
-        return mSubtotal;
+    /**
+     * Gets the total amount in dollars.
+     * @return The total amount in dollars.
+     */
+    public double getTotalAmount() {
+        return mTotalAmount;
     }
 
-    public void setSubtotal(double subtotal) {
-        mSubtotal = subtotal;
-        recalculate();
+    /**
+     * Sets the amount of the <code>Bill</code> before tip.
+     * @param amount The amount of the <code>Bill</code> before tip.
+     */
+    public void setAmount(double amount) {
+        mAmount = amount;
+        recalculateAmounts();
+    }
+    /**
+     * Sets the tip percentage as a real number.
+     * E.g. 20% will be returned as 0.2
+     * @param tipPercent The tip percentage as a real number.
+     */
+    public void setTipPercent(double tipPercent) {
+        mTipPercent = tipPercent;
+        recalculateAmounts();
+    }
+
+    // Private method to recalculate all the amounts (tip and total).
+    private void recalculateAmounts()
+    {
+        mTipAmount = mAmount * mTipPercent;
+        mTotalAmount = mAmount + mTipAmount;
     }
 }
